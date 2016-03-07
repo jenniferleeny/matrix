@@ -40,7 +40,6 @@ Returns:
 3. free actual matrix
 */
 void free_matrix(struct matrix *m) {
-
   int i;
   for (i=0;i<m->rows;i++) {
     free(m->m[i]);
@@ -73,6 +72,13 @@ Returns:
 print the matrix
 */
 void print_matrix(struct matrix *m) {
+  int r = m->rows;
+  int c = m->cols;
+  for (int i = 0; i < r; i++) {
+    for (int j = 0; j < c; j++) 
+      printf("%fl\t", m->m[i][j]);
+    printf("\n");
+  }
 }
 
 /*-------------- void ident() --------------
@@ -81,8 +87,15 @@ Returns:
 turns m in to an identity matrix
 */
 void ident(struct matrix *m) {
+  for (int i = 0; i < m->rows; i++) {
+    for (int j = 0; j < m->cols; j++) {
+      if (i == j)
+	m->m[i][j] = 1;
+      else
+	m->m[i][j] = 0;
+    }
+  }
 }
-
 
 /*-------------- void scalar_mult() --------------
 Inputs:  double x
@@ -91,6 +104,11 @@ Returns:
 multiply each element of m by x
 */
 void scalar_mult(double x, struct matrix *m) {
+  for (int i = 0; i < m->rows; i++) {
+    for (int j = 0; j < m->cols; j++) {
+      m->m[i][j] = x*m->m[i][j];
+    }
+  }
 }
 
 
@@ -101,6 +119,7 @@ Returns:
 a*b -> b
 */
 void matrix_mult(struct matrix *a, struct matrix *b) {
+  
 }
 
 
@@ -112,54 +131,58 @@ Returns:
 copy matrix a to matrix b
 */
 void copy_matrix(struct matrix *a, struct matrix *b) {
-
+  
   int r, c;
-
+  
   for (r=0; r < a->rows; r++) 
     for (c=0; c < a->cols; c++)  
       b->m[r][c] = a->m[r][c];  
 }
 
 /*======== struct matrix * make_translate() ==========
-Inputs:  int x
+  Inputs:  int x
          int y
          int z 
-Returns: The translation matrix created using x, y and z 
-as the translation offsets.
-====================*/
-struct matrix * make_translate(double x, double y, double z) {
-}
+	 Returns: The translation matrix created using x, y and z 
+	 as the translation offsets.
+	 ====================*/
+/*struct matrix * make_translate(double x, double y, double z) {
+  }*/
 
 /*======== struct matrix * make_scale() ==========
-Inputs:  int x
-         int y
+  Inputs:  int x
+  int y
          int z 
-Returns: The translation matrix creates using x, y and z
+	 Returns: The translation matrix creates using x, y and z
 as the scale factors
 ====================*/
-struct matrix * make_scale(double x, double y, double z) {
-}
+/*struct matrix * make_scale(double x, double y, double z) {
+  }*/
 
 /*======== struct matrix * make_rotX() ==========
 Inputs:  double theta
 Returns: The rotation matrix created using theta as the 
 angle of rotation and X as the axis of rotation.
 ====================*/
+/*
 struct matrix * make_rotX(double theta) {
 }
-
+*/
 /*======== struct matrix * make_rotY() ==========
 Inputs:  double theta
 Returns: The rotation matrix created using theta as the 
 angle of rotation and Y as the axis of rotation.
 ====================*/
+/*
 struct matrix * make_rotY(double theta) {
 }
-
+*/
 /*======== struct matrix * make_rotZ() ==========
 Inputs:  double theta
 Returns: The rotation matrix created using theta as the 
 angle of rotation and Z as the axis of rotation.
 ====================*/
+/*
 struct matrix * make_rotZ(double theta) {
 }
+*/
