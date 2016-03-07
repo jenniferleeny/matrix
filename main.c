@@ -21,45 +21,59 @@ int main() {
   struct matrix *points;
   struct matrix *edges;
   struct matrix *transform;
-  /*  printf("Creating points matrix...\n");
+  printf("Creating points matrix...\n");
   points = new_matrix(4, 4);
-  add_point(points, 1, 2, 3);
-  add_point(points, 1, 2, 3);
-  add_point(points, 1, 2, 3);
-  add_point(points, 1, 2, 3);
+  add_point(points, 100, 200, 300);
+  add_point(points, 100, 200, 300);
+  add_point(points, 100, 200, 300);
+  add_point(points, 100, 200, 300);
   print_matrix(points);
   printf("\n");
-  */
+  
+  //
+  struct matrix *point;
+  point = new_matrix(4, 4);
+  add_point(point, 100, 200, 300);
+  add_point(point, 100, 200, 300);
+  add_point(point, 100, 200, 300);
+  add_point(point, 100, 200, 300);
+
+
   printf("Creating edges matrix...\n");
-  edges = new_matrix(4, 4);
-  add_edge(edges, 1, 50, 100, 34, 150, 160); //(x0, y0, z0) = (1, 2, 3), (x1, y1, z1) = (4, 5, 6)
-  add_edge(edges, 40, 150, 160, 220, 310, 190);
+  edges = new_matrix(4, 8);
+  add_edge(edges, 50, 100, 1, 50, 300, 1); //(x0, y0, z0) = (1, 2, 3), (x1, y1, z1) = (4, 5, 6)
+  add_edge(edges, 50, 300, 1, 250, 300, 1);
+  add_edge(edges, 250, 300, 1, 250, 100, 1);
+  add_edge(edges, 250, 100, 1, 50, 100, 1); 
   print_matrix(edges);
   
   //draw_line(0, 0, 200, 200 , s, c);
   draw_lines(edges, s, c);
-  printf("\n");
-  /*
-  printf("printing points matrix post-scalar...\n");
-  double d = 5.0;
-  scalar_mult(d, points);
-  print_matrix(points);
+  //display(s);
   printf("\n");
   
+  printf("printing points matrix post-scalar...\n");
+  double d = 2.0;
+  scalar_mult(d, edges);
+  print_matrix(edges);
+  printf("\n");
+  
+  //display(s);
+  /*
   printf("printing points matrix post-ident...\n");
   ident(points);
   print_matrix(points);
   
   printf("\n");
-  
+  */
   printf("printing points matrix post-matrix_mult...\n");
-  matrix_mult(points, edges);
-  print_matrix(points);
+  matrix_mult(points, point);
+  print_matrix(point);
 
   transform = new_matrix(4, 4);
   
   
   free_matrix( transform );
   free_matrix( edges );
-  */
+  
 }  

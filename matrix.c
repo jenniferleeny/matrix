@@ -120,37 +120,25 @@ a*b -> b
 */
 void matrix_mult(struct matrix *a, struct matrix *b) {
   //goes across and down b matrix to refill it
-  double sum = 0;
-  for (int g = 0; g < a->rows; g++) {
-    for (int h = 0; h < b->cols; h++) {
-      //adds multiplied numbers to sum
-      for (int i = 0; b->rows;i++) {
-	double b_val = b->m[i][h];
-	double a_val = a->m[g][i];
-	sum += a_val * b_val;
+  double sum = 0.0;
+  struct matrix *c = new_matrix(a->rows, b->cols);
+  if (a->cols != b->rows || a->rows != b->cols) 
+    printf("MATRIC_MULT: A AND B DO NOT FULFILL THE REQUIREMENT FOR MULTIPLCATION.\n");
+  else {
+    for (int g = 0; g < c->rows; g++) {
+      for (int h = 0; h < c->cols; h++) {
+	//adds multiplied numbers to sum
+	for (int i = 0; i < b->rows;i++) {
+	  sum += b->m[i][h] * a->m[g][i];
+	}
+	c->m[g][h] = sum;
+	printf("sum: %lf\n", sum);
+	sum = 0;
       }
-      b->m[g][h] = sum;
-      sum = 0;
     }
+    copy_matrix(c, b);
   }
 }
-/*  int a_rows = a->rows; int b_rows = b->rows;
-    int b_cols = b->cols;
-  if (a_rows == b_cols) {
-    for (int i = 0; i < a_rows; i++) {
-      for (int j = 0; j < a->cols; j++) {
-	//sum += a->a[i][j] * b->b[i][j];
-	b->b[i][j] += a->[i][j] * b->b[j][i]; 
-      }
-      b->b[i][j] = sum;
-      sum = 0;
-    }
-  }
-  else
-    printf("THE MATRICES PROVIDED CANNOT BE MULTIPLIED TOGETHER.\n");
-  */
-
-
 
 /*-------------- void copy_matrix() --------------
 Inputs:  struct matrix *a
@@ -174,8 +162,20 @@ void copy_matrix(struct matrix *a, struct matrix *b) {
 	 Returns: The translation matrix created using x, y and z 
 	 as the translation offsets.
 	 ====================*/
-/*struct matrix * make_translate(double x, double y, double z) {
-  }*/
+struct matrix * make_translate(double x, double y, double z) {
+  struct matrix *a = new_matrix(4, 4);
+  for (int i = 0; i < a->row; i++) {
+    for (int j = 0; j < a -> col; j++) {
+      if (i == j)
+	a->m[i][j] = 1;
+      else
+	a->m[i][j] = 0;
+    }
+  }
+  a->m[0][3] = x;
+  a->m[1][3] = y;
+  a->m[2][3] = z;
+}
 
 /*======== struct matrix * make_scale() ==========
   Inputs:  int x
