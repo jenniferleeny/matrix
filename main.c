@@ -134,16 +134,27 @@ int main() {
   matrix_mult(translater_3, edges);
   matrix_mult(scaler, edges);
   
-  for (int i = 0; i < 8; i++) {
+  for (int i = 0; i < 7; i++) {
     matrix_mult(translater, edges);
     draw_lines(edges, s, c);
   }
-  display(s);
-  //make_rotY(30.0);
-  //make_rotZ(30.0);
+  c.red = 150;
+  c.green = 90;
+  c.blue = 29;
+  struct matrix *translater_4 = new_matrix(4, 4);
+  copy_matrix(make_translate(-70, -50, 0), translater_4);
+
+  matrix_mult(translater_4, edges);
+  matrix_mult(scaler, edges);
+
+  for (int i = 0; i < 5; i++) {
+    matrix_mult(translater, edges);
+    draw_lines(edges, s, c);
+  }
   
-  //free_matrix(points);
-  //free_matrix(point);
+  display(s);
+  
+  
   //free_matrix( transform );
   free_matrix( edges );
 }  
