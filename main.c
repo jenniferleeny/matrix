@@ -151,10 +151,7 @@ int main() {
     matrix_mult(translater, edges);
     draw_lines(edges, s, c);
   }
-  
   display(s);
-  
-  
-  //free_matrix( transform );
+  save_extension(s, "matrix.png");
   free_matrix( edges );
 }  
