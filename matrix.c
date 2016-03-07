@@ -72,10 +72,10 @@ Returns:
 print the matrix
 */
 void print_matrix(struct matrix *m) {
-  int r = m->rows;
-  int c = m->cols;
-  for (int i = 0; i < r; i++) {
-    for (int j = 0; j < c; j++) 
+  //int r = m->rows;
+  //int c = m->cols;
+  for (int i = 0; i < m->rows; i++) {
+    for (int j = 0; j < m->cols; j++) 
       printf("%fl\t", m->m[i][j]);
     printf("\n");
   }
@@ -119,8 +119,36 @@ Returns:
 a*b -> b
 */
 void matrix_mult(struct matrix *a, struct matrix *b) {
-  
+  //goes across and down b matrix to refill it
+  double sum = 0;
+  for (int g = 0; g < a->rows; g++) {
+    for (int h = 0; h < b->cols; h++) {
+      //adds multiplied numbers to sum
+      for (int i = 0; b->rows;i++) {
+	double b_val = b->m[i][h];
+	double a_val = a->m[g][i];
+	sum += a_val * b_val;
+      }
+      b->m[g][h] = sum;
+      sum = 0;
+    }
+  }
 }
+/*  int a_rows = a->rows; int b_rows = b->rows;
+    int b_cols = b->cols;
+  if (a_rows == b_cols) {
+    for (int i = 0; i < a_rows; i++) {
+      for (int j = 0; j < a->cols; j++) {
+	//sum += a->a[i][j] * b->b[i][j];
+	b->b[i][j] += a->[i][j] * b->b[j][i]; 
+      }
+      b->b[i][j] = sum;
+      sum = 0;
+    }
+  }
+  else
+    printf("THE MATRICES PROVIDED CANNOT BE MULTIPLIED TOGETHER.\n");
+  */
 
 
 
